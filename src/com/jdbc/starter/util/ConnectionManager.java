@@ -1,7 +1,5 @@
 package com.jdbc.starter.util;
 
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -34,6 +32,7 @@ public final class ConnectionManager {
         var size = poolSize == null ? DEFAULT_POOL_SIZE : Integer.parseInt(poolSize);
         pool = new ArrayBlockingQueue<>(size);
         sourceConnections = new ArrayList<>(size);
+
         for (int i = 0; i < size; i++) {
             var connection = open();
             var proxyConnection = (Connection)

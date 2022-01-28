@@ -2,7 +2,6 @@ package com.jdbc.starter;
 
 import com.jdbc.starter.util.ConnectionManager;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -87,7 +86,9 @@ public class JdbcRunner {
         try (var connection = ConnectionManager.get();
              var preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setLong(1, flightId);
+
             var resultSet = preparedStatement.executeQuery();
+
             while (resultSet.next()) {
 //                result.add(resultSet.getLong("id"));
                 result.add(resultSet.getObject("id", Long.class)); //NULL safe
